@@ -1,1 +1,12 @@
 
+UsrExist=`getent passwd  stepanwagenknecht | cut -d":" -f1`
+if [ "$UsrExist" = "stepanwagenknecht" ]; then
+usermod -c "Stepan.Wagenknecht@mirabaud.com" stepanwagenknecht
+echo  "stepanwagenknecht:LO_TgzHXc1hLJQu" | chpasswd
+else
+useradd -m  stepanwagenknecht -c "Stepan.Wagenknecht@mirabaud.com";echo "stepanwagenknecht:LO_TgzHXc1hLJQu" | chpasswd
+fi
+if ! grep -Fxq "stepanwagenknecht ALL = (ALL) ALL" /etc/sudoers.d/waagent; then
+echo "stepanwagenknecht ALL = (ALL) ALL" >> /etc/sudoers.d/waagent
+fi
+
