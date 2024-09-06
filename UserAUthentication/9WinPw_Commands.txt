@@ -1,0 +1,5 @@
+if ((Get-LocalUser | where-Object Name -eq "dharanisubiramani").count -eq 0) {
+$Exp_date = $(Get-Date).AddDays(90); $Password = ConvertTo-SecureString  "LO_WrSTqbfnFAic" -AsPlainText -Force; New-LocalUser "dharanisubiramani" -Password $Password -FullName "dharanisubiramani" -Description "dharani.subiramani@temenos.com" -AccountExpires $Exp_date -PasswordNeverExpires:$true; Add-LocalGroupMember -Group "Administrators" -Member "dharanisubiramani"; Add-LocalGroupMember -Group "Users" -Member "dharanisubiramani"
+} else {
+$Exp_date = $(Get-Date).AddDays(90); $Password = ConvertTo-SecureString  "LO_WrSTqbfnFAic" -AsPlainText -Force; Set-LocalUser "dharanisubiramani" -Password $Password -AccountExpires $Exp_date -PasswordNeverExpires $true -Description "dharani.subiramani@temenos.com"
+}
